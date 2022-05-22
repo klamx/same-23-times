@@ -1,13 +1,22 @@
 import { nanoid } from 'nanoid'
-import { useState } from 'react'
+import { useState, useReducer, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toast'
 import List from './components/List'
 import Form from './components/Form'
+import giftsReducer from './reducers/giftsReducer'
+
+const init = () => {
+  return JSON.parse(localStorage.getItem('gifts')) || [] // eslint-disable-line
+}
 
 function App () {
-  const [regalos, setRegalos] = useState([
-    { name: 'Medias', id: nanoid(), cantidad: 1 }
-  ])
+  const [regalos, dispatch] = useReducer(giftsReducer, [], init)
+
+  useEffect(() => {
+    localStorage.setItem('gifts', JSON.stringify(regalos)) // eslint-disable-line
+  }, [regalos])
+
+  // const [regalos, setRegalos] = useState([])
   const [newRegalo, setNewRegalo] = useState('')
   const [cantidad, setCantidad] = useState(1)
 
@@ -26,7 +35,9 @@ function App () {
       return
     }
 
-    const found = regalos.filter((regalo) => regalo.name.toLowerCase() === newRegalo.toLowerCase())
+    const found = regalos.filter(
+      (regalo) => regalo.name.toLowerCase() === newRegalo.toLowerCase()
+    )
     if (found.length > 0) {
       toast.warn('El regalo ya esta en la lista')
       return
@@ -38,18 +49,28 @@ function App () {
       cantidad
     }
 
-    setRegalos([...regalos, newRegaloObj])
+    const addRegalo = {
+      type: 'agregar',
+      payload: newRegaloObj
+    }
+
+    dispatch(addRegalo)
     setNewRegalo('')
     setCantidad(1)
   }
 
   const handleDelete = (id) => {
-    const newRegalos = regalos.filter((regalo) => regalo.id !== id)
-    setRegalos(newRegalos)
+    const giftDelete = {
+      type: 'borrar',
+      payload: {
+        id
+      }
+    }
+    dispatch(giftDelete)
   }
 
   const handleDeleteAll = () => {
-    setRegalos([])
+    dispatch({ type: 'borrarTodo' })
   }
 
   return (
