@@ -1,9 +1,10 @@
 import { nanoid } from 'nanoid'
-import { useState, useReducer, useEffect } from 'react'
+import { useReducer, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toast'
 import List from './components/List'
 import Form from './components/Form'
 import giftsReducer from './reducers/giftsReducer'
+import useForm from './hooks/useForm'
 
 const init = () => {
   return JSON.parse(localStorage.getItem('gifts')) || [] // eslint-disable-line
@@ -16,17 +17,8 @@ function App () {
     localStorage.setItem('gifts', JSON.stringify(regalos)) // eslint-disable-line
   }, [regalos])
 
-  // const [regalos, setRegalos] = useState([])
-  const [newRegalo, setNewRegalo] = useState('')
-  const [cantidad, setCantidad] = useState(1)
-
-  const handleChange = (e) => {
-    setNewRegalo(e.target.value)
-  }
-
-  const handleCantidad = (e) => {
-    setCantidad(e.target.value)
-  }
+  const [formValues, handleFormChange] = useForm({ newRegalo: '', cantidad: 1 })
+  const { newRegalo, cantidad } = formValues
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -55,8 +47,8 @@ function App () {
     }
 
     dispatch(addRegalo)
-    setNewRegalo('')
-    setCantidad(1)
+    // setNewRegalo('')
+    // setCantidad(1)
   }
 
   const handleDelete = (id) => {
@@ -96,9 +88,8 @@ function App () {
         <Form
           newRegalo={newRegalo}
           cantidad={cantidad}
-          handleChange={handleChange}
           handleSubmit={handleSubmit}
-          handleCantidad={handleCantidad}
+          handleFormChange={handleFormChange}
         />
       </div>
     </div>
