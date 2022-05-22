@@ -17,8 +17,12 @@ function App () {
     localStorage.setItem('gifts', JSON.stringify(regalos)) // eslint-disable-line
   }, [regalos])
 
-  const [formValues, handleFormChange, handleReset] = useForm({ newRegalo: '', cantidad: 1 })
-  const { newRegalo, cantidad } = formValues
+  const [formValues, handleFormChange, handleReset] = useForm({
+    newRegalo: '',
+    cantidad: 1,
+    image: ''
+  })
+  const { newRegalo, cantidad, image } = formValues
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -35,10 +39,13 @@ function App () {
       return
     }
 
+    const img = image !== '' ? image : 'https://via.placeholder.com/150'
+
     const newRegaloObj = {
       name: newRegalo,
       id: nanoid(),
-      cantidad
+      cantidad,
+      image: img
     }
 
     const addRegalo = {
@@ -87,6 +94,7 @@ function App () {
         <Form
           newRegalo={newRegalo}
           cantidad={cantidad}
+          image={image}
           handleSubmit={handleSubmit}
           handleFormChange={handleFormChange}
         />

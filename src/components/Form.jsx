@@ -1,23 +1,31 @@
 function Form (props) {
-  const { handleFormChange, handleSubmit, newRegalo, cantidad } = props
+  const { handleFormChange, handleSubmit, newRegalo, cantidad, image } = props
   return (
     <form onSubmit={handleSubmit}>
       <input
         className='form_controller_input'
-        onChange={handleFormChange}
-        value={newRegalo}
-        type='text'
-        placeholder='Agregar regalos'
         name='newRegalo'
+        onChange={handleFormChange}
+        placeholder='Agregar regalos'
+        type='text'
+        value={newRegalo}
+      />
+      <input
+        className='form_controller_input'
+        name='image'
+        onChange={handleFormChange}
+        placeholder='http://img.com'
+        type='text'
+        value={image}
       />
       <div>
         <input
           className='form_controller_input'
-          type='number'
-          name='cantidad'
-          value={cantidad}
-          onChange={handleFormChange}
           min={1}
+          name='cantidad'
+          onChange={handleFormChange}
+          type='number'
+          value={cantidad}
         />
         <button className='form_controller_btn' type='submit'>
           <i className='fa fa-plus' />
