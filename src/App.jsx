@@ -1,11 +1,18 @@
-// import { useState } from 'react'
+import { useState } from 'react'
 
 function App () {
-  // const [count, setCount] = useState(0)
+  const [regalos] = useState(['medias', 'camisetas', 'pantalones'])
 
   return (
     <div className='App'>
       <h1>Regalos:</h1>
+      <ul>
+        {regalos.map(regalo => {
+          return (
+            <li key={regalos}>{regalo}</li>
+          )
+        })}
+      </ul>
     </div>
   )
 }
