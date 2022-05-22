@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid'
 import { useState } from 'react'
+import { ToastContainer, toast } from 'react-toast'
 import List from './components/List'
 import Form from './components/Form'
 
@@ -13,6 +14,16 @@ function App () {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (newRegalo === '') {
+      toast.warn('No hay regalo para agregar a la lista')
+      return
+    }
+
+    if (regalos.filter((regalo) => regalo.name === newRegalo)) {
+      toast.warn('El regalo ya esta en la lista')
+      return
+    }
+
     const newRegaloObj = {
       name: newRegalo,
       id: nanoid()
@@ -32,6 +43,7 @@ function App () {
 
   return (
     <div className='App'>
+      <ToastContainer position='top-right' delay={1500} />
       <h1>Regalos:</h1>
       <div className='lista'>
         {regalos.length === 0
