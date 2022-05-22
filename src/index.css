@@ -13,11 +13,11 @@
   align-items: center;
 
   /* From https://css.glass */
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
-  background: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(7.2px);
+  backdrop-filter: blur(7.2px);
+  background: rgba(255, 255, 255, 0.41);
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.34);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
@@ -32,7 +32,7 @@ html {
 }
 
 body {
-  background-image: url('https://img.freepik.com/free-photo/golden-sparkling-particles-isolated-black_222260-107.jpg?w=1060');
+  background-image: url('https://images.alphacoders.com/667/thumb-1920-667386.jpg');
   background-repeat: no-repeat;
   background-size: 100vw 100vh;
   display: grid;
@@ -70,23 +70,54 @@ ul li {
 form {
   align-items: center;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   width: 400px;
+  gap: 0.2rem;
 }
 
-form input {
-  border-radius: 10px;
+form div {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0.2rem;
+}
+
+.form_controller_input {
+  border-radius: 5px;
   font-family: inherit;
   font-size: inherit;
-  height: 2.5rem;
+  height: 2rem;
   padding: 0.5rem;
   width: 100%;
   border: 2px #ffa00100 solid;
   margin-top: 0.4rem;
 }
 
-form input:focus {
+input[type='number'] {
+  width: 70px;
+}
+
+.form_controller_btn {
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: inherit;
+  height: 2rem;
+  padding: 0.5rem;
+  border: 2px #ffa00100 solid;
+  margin-top: 0.4rem;
+  background: #ff4433;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_controller_btn i {
+  color: #ccc;
+}
+
+.form_controller_input:focus {
   outline: 2px #ff4433 solid;
 }
 
@@ -102,7 +133,7 @@ i:hover {
 .borrar_todo {
   align-items: center;
   background: #ff4433;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid #ff4433;
   color: white;
   display: flex;
@@ -113,5 +144,5 @@ i:hover {
 }
 
 .borrar_todo:hover {
-  border: 1px solid #fff;
+  border: 2px solid #ccc;
 }

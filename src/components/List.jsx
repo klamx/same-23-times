@@ -5,7 +5,7 @@ function List (props) {
       {regalos.map((regalo) => {
         return (
           <li key={regalo.id}>
-            {regalo.name}{' '}
+            {regalo.name}{' '} x{regalo.cantidad}
             <i
               onClick={() => handleDelete(regalo.id)}
               className='fa fa-trash'
