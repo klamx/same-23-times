@@ -17,7 +17,7 @@ function App () {
     localStorage.setItem('gifts', JSON.stringify(regalos)) // eslint-disable-line
   }, [regalos])
 
-  const [formValues, handleFormChange] = useForm({ newRegalo: '', cantidad: 1 })
+  const [formValues, handleFormChange, handleReset] = useForm({ newRegalo: '', cantidad: 1 })
   const { newRegalo, cantidad } = formValues
 
   const handleSubmit = (e) => {
@@ -47,8 +47,7 @@ function App () {
     }
 
     dispatch(addRegalo)
-    // setNewRegalo('')
-    // setCantidad(1)
+    handleReset()
   }
 
   const handleDelete = (id) => {

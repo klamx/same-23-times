@@ -6,7 +6,11 @@ function useForm (initialState = {}) {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
 
-  return [formValues, handleFormChange]
+  const handleReset = () => {
+    setFormValues(initialState)
+  }
+
+  return [formValues, handleFormChange, handleReset]
 }
 
 export default useForm
