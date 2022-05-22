@@ -26,7 +26,7 @@ function App () {
       return
     }
 
-    const found = regalos.filter((regalo) => regalo.name === newRegalo)
+    const found = regalos.filter((regalo) => regalo.name.toLowerCase() === newRegalo.toLowerCase())
     if (found.length > 0) {
       toast.warn('El regalo ya esta en la lista')
       return
