@@ -55,10 +55,17 @@ export const ModalBtn = styled.button`
   height: 2rem;
   text-align: center;
   width: 8rem;
+  outline: none;
 
   &:hover {
     background: ${props => props.backgroundColor};
     border: 2px solid #fff;
     color: #fff;
   }
+
+  &:focus {
+    border: 2px solid #fff;
+    background: #F00;
+    color: #fff;
+  } 
 `

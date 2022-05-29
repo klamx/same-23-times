@@ -28,9 +28,14 @@ export const MainBtn = styled.button`
   color: #fff;
   font-size: 1.3rem;
 
-  &:hover {
+  &:hover, &:focus {
     background: #fff;
     color: #f00;
+  }
+
+  &:focus {
+    border: 2px solid #f00;
+    outline: none;
   }
 `
 export const ListContainer = styled.div`
