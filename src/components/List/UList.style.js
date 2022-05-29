@@ -29,11 +29,25 @@ export const ListElement = styled.li`
   }
 
   & i {
-    font-size: 1.8rem;
-    color: #ccc;
+    font-size: 1.5rem;
+    color: #fff;
 
     &:hover {
       color: #ff0000;
     }
+  }
+`
+
+export const LiTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  & p, small {
+    width: 100%;
+    text-align: left;
+  }
+
+  & small {
+    color: #ccc;
   }
 `

@@ -19,16 +19,25 @@ function App () {
     localStorage.setItem('gifts', JSON.stringify(regalos)) // eslint-disable-line
   }, [regalos])
 
-  const [formValues, handleFormChange, handleReset] = useForm({
+  const [formValues, setFormValues, handleFormChange, handleReset] = useForm({
     newRegalo: '',
     cantidad: 1,
-    image: ''
+    image: '',
+    destinatario: ''
   })
-  const { newRegalo, cantidad, image } = formValues
+  const { newRegalo, cantidad, image, destinatario } = formValues
   const [adding, setAdding] = useState(false)
+  const [editing, setEditing] = useState(false)
+
+  const handleEdit = (id) => {
+    const editingRegalo = regalos.find(regalo => regalo.id === id)
+    setEditing(true)
+    setFormValues(editingRegalo)
+  }
 
   const handleAdd = () => {
-    setAdding(!adding)
+    setAdding(true)
+    handleReset()
   }
 
   const handleSubmit = (e) => {
@@ -39,7 +48,7 @@ function App () {
     }
 
     const found = regalos.filter(
-      (regalo) => regalo.name.toLowerCase() === newRegalo.toLowerCase()
+      (regalo) => regalo.newRegalo.toLowerCase() === newRegalo.toLowerCase()
     )
     if (found.length > 0) {
       toast.warn('El regalo ya esta en la lista')
@@ -49,10 +58,11 @@ function App () {
     const img = image !== '' ? image : 'https://via.placeholder.com/150'
 
     const newRegaloObj = {
-      name: newRegalo,
+      newRegalo,
       id: nanoid(),
       cantidad,
-      image: img
+      image: img,
+      destinatario
     }
 
     const addRegalo = {
@@ -78,19 +88,25 @@ function App () {
     dispatch({ type: 'borrarTodo' })
   }
 
+  const submitEdit = (e) => {
+    e.preventDefault()
+    dispatch({ type: 'editar', payload: formValues })
+    handleReset()
+  }
+
   return (
     <AppStyled>
       <GlobalStyles />
 
       <Title>Regalos:</Title>
-      <MainBtn onClick={handleAdd}>Agregar Regalo</MainBtn>
+      <MainBtn onClick={() => handleAdd()}>Agregar Regalo</MainBtn>
       <ListContainer>
         {regalos.length === 0
           ? (
             <h3>No hay regalos en la lista</h3>
             )
           : (
-            <List regalos={regalos} handleDelete={handleDelete} />
+            <List regalos={regalos} handleDelete={handleDelete} handleEdit={handleEdit} />
             )}
       </ListContainer>
 
@@ -100,14 +116,19 @@ function App () {
         </MainBtn>
       )}
 
-      {adding && (
+      {(adding || editing) && (
         <Form
           newRegalo={newRegalo}
           cantidad={cantidad}
           image={image}
+          destinatario={destinatario}
           handleSubmit={handleSubmit}
           handleFormChange={handleFormChange}
-          handleAdd={handleAdd}
+          setAdding={setAdding}
+          setEditing={setEditing}
+          adding={adding}
+          editing={editing}
+          submitEdit={submitEdit}
         />
       )}
     </AppStyled>

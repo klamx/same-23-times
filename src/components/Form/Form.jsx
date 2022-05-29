@@ -8,9 +8,20 @@ import {
 import { ToastContainer } from 'react-toast'
 
 function Form (props) {
-  const { handleFormChange, handleSubmit, handleAdd, newRegalo, cantidad, image } = props
+  const {
+    handleFormChange,
+    handleSubmit,
+    setEditing,
+    setAdding,
+    adding,
+    newRegalo,
+    cantidad,
+    image,
+    destinatario,
+    submitEdit
+  } = props
   return (
-    <FormContainer onSubmit={handleSubmit}>
+    <FormContainer onSubmit={adding ? handleSubmit : submitEdit}>
       <ToastContainer position='top-right' delay={1500} />
       <ModalContainer>
         <Input
@@ -19,6 +30,14 @@ function Form (props) {
           placeholder='Agregar regalo'
           type='text'
           value={newRegalo}
+          autoFocus
+        />
+        <Input
+          name='destinatario'
+          onChange={handleFormChange}
+          placeholder='Destinatario'
+          type='text'
+          value={destinatario}
         />
         <Input
           name='image'
@@ -35,11 +54,19 @@ function Form (props) {
           value={cantidad}
         />
         <ButtonContainer>
-          <ModalBtn onClick={handleAdd} type='button' backgroundColor='#ff0000' hover='#ffaaaa'>
+          <ModalBtn
+            onClick={() => {
+              setAdding(false)
+              setEditing(false)
+            }}
+            type='button'
+            backgroundColor='#ff0000'
+            hover='#ffaaaa'
+          >
             Cerrar
           </ModalBtn>
           <ModalBtn type='submit' backgroundColor='#ff0000' hover='#ffaaaa'>
-            Agregar
+            {adding ? 'Agregar' : 'Editar'}
           </ModalBtn>
         </ButtonContainer>
       </ModalContainer>

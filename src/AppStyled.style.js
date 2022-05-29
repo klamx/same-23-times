@@ -6,7 +6,7 @@ export const AppStyled = styled.div`
   width: 450px;
   height: 500px;
   font-size: 1.5rem;
-  color: #ccc;
+  color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -25,11 +25,11 @@ export const MainBtn = styled.button`
   height: 2rem;
   background: #ff0000;
   border: 2px solid #f00;
-  color: #ccc;
+  color: #fff;
   font-size: 1.3rem;
 
   &:hover {
-    background: #ccc;
+    background: #fff;
     color: #f00;
   }
 `

@@ -10,7 +10,7 @@ function useForm (initialState = {}) {
     setFormValues(initialState)
   }
 
-  return [formValues, handleFormChange, handleReset]
+  return [formValues, setFormValues, handleFormChange, handleReset]
 }
 
 export default useForm
