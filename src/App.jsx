@@ -1,10 +1,12 @@
 import { nanoid } from 'nanoid'
-import { useReducer, useEffect } from 'react'
-import { ToastContainer, toast } from 'react-toast'
-import List from './components/List'
-import Form from './components/Form'
+import { useReducer, useEffect, useState } from 'react'
+import { toast } from 'react-toast'
+import List from './components/List/List'
+import Form from './components/Form/Form'
 import giftsReducer from './reducers/giftsReducer'
 import useForm from './hooks/useForm'
+import { MainBtn, AppStyled } from './AppStyled.style'
+import { GlobalStyles } from './GlobalStyles'
 
 const init = () => {
   return JSON.parse(localStorage.getItem('gifts')) || [] // eslint-disable-line
@@ -23,6 +25,11 @@ function App () {
     image: ''
   })
   const { newRegalo, cantidad, image } = formValues
+  const [adding, setAdding] = useState(true)
+
+  const handleAdd = () => {
+    setAdding(!adding)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -72,9 +79,11 @@ function App () {
   }
 
   return (
-    <div className='App'>
-      <ToastContainer position='top-right' delay={1500} />
+    <AppStyled>
+      <GlobalStyles />
+
       <h1>Regalos:</h1>
+      <MainBtn onClick={handleAdd}>Agregar Regalo</MainBtn>
       <div className='lista'>
         {regalos.length === 0
           ? (
@@ -84,22 +93,24 @@ function App () {
             <List regalos={regalos} handleDelete={handleDelete} />
             )}
       </div>
-      <div>
-        {regalos.length > 0 && (
-          <button onClick={handleDeleteAll} className='borrar_todo'>
-            Borrar todo
-          </button>
-        )}
 
+      {regalos.length > 0 && (
+        <MainBtn onClick={handleDeleteAll}>
+          Borrar todo
+        </MainBtn>
+      )}
+
+      {adding && (
         <Form
           newRegalo={newRegalo}
           cantidad={cantidad}
           image={image}
           handleSubmit={handleSubmit}
           handleFormChange={handleFormChange}
+          handleAdd={handleAdd}
         />
-      </div>
-    </div>
+      )}
+    </AppStyled>
   )
 }
 
