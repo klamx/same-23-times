@@ -1,10 +1,12 @@
+import { UList, ListElement } from './UList.style'
+
 function List (props) {
   const { regalos, handleDelete } = props
   return (
-    <ul>
+    <UList>
       {regalos.map((regalo) => {
         return (
-          <li key={regalo.id}>
+          <ListElement key={regalo.id}>
             <div>
               <img src={regalo.image} alt={`image for ${regalo.image}`} />
               {regalo.name} x{regalo.cantidad}
@@ -13,10 +15,10 @@ function List (props) {
               onClick={() => handleDelete(regalo.id)}
               className='fa fa-trash'
             />
-          </li>
+          </ListElement>
         )
       })}
-    </ul>
+    </UList>
   )
 }
 

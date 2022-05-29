@@ -33,3 +33,14 @@ export const MainBtn = styled.button`
     color: #f00;
   }
 `
+export const ListContainer = styled.div`
+  height: 250px;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+`
+
+export const Title = styled.h1`
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 3.5rem;
+`

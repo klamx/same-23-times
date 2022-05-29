@@ -5,7 +5,7 @@ import List from './components/List/List'
 import Form from './components/Form/Form'
 import giftsReducer from './reducers/giftsReducer'
 import useForm from './hooks/useForm'
-import { MainBtn, AppStyled } from './AppStyled.style'
+import { MainBtn, AppStyled, ListContainer, Title } from './AppStyled.style'
 import { GlobalStyles } from './GlobalStyles'
 
 const init = () => {
@@ -25,7 +25,7 @@ function App () {
     image: ''
   })
   const { newRegalo, cantidad, image } = formValues
-  const [adding, setAdding] = useState(true)
+  const [adding, setAdding] = useState(false)
 
   const handleAdd = () => {
     setAdding(!adding)
@@ -82,9 +82,9 @@ function App () {
     <AppStyled>
       <GlobalStyles />
 
-      <h1>Regalos:</h1>
+      <Title>Regalos:</Title>
       <MainBtn onClick={handleAdd}>Agregar Regalo</MainBtn>
-      <div className='lista'>
+      <ListContainer>
         {regalos.length === 0
           ? (
             <h3>No hay regalos en la lista</h3>
@@ -92,7 +92,7 @@ function App () {
           : (
             <List regalos={regalos} handleDelete={handleDelete} />
             )}
-      </div>
+      </ListContainer>
 
       {regalos.length > 0 && (
         <MainBtn onClick={handleDeleteAll}>
